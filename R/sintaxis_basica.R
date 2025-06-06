@@ -7,7 +7,7 @@
 
 5 + 3
 10 - 4
-6 * 7
+6 * 8
 100 / 5
 2^3  # Exponenciación (2 elevado a 3)
 (5 + 3) * 2 # Uso de paréntesis
