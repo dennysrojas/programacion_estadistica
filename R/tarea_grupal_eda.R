@@ -1,14 +1,14 @@
-#install.packages("tidyverse")
-#install.packages("skimr")
-#install.packages("maps")
-#install.packages("corrplot")
+install.packages("tidyverse")
+install.packages("skimr")
+install.packages("maps")
+install.packages("corrplot")
 
 
 #Paquetes necesarios
 library(tidyverse)
 library(skimr)
 library(maps)
-library(coorplot)
+library(corrplot)
 #----------------#
 # Carga de datos #
 #----------------#
