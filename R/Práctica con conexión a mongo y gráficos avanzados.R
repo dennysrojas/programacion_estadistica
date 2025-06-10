@@ -25,17 +25,17 @@ library(forcats)
 # 1. Conectar a la colección 'restaurants'
 conexion_restaurants <- mongo(collection = "restaurants",
                          db = "sample_restaurants",
-                         url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.zou4pc5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+                         url = "mongodb+srv://username:password@cluster0.zou4pc5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 # Obtener dataframes
 df_restaurants <- conexion_restaurants$find()
 
 View(df_restaurants)
 
-#df_movies_pp <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
+#df_movies_pp <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
 #View(df_movies_pp)
 
-#df_movies_2 <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
+#df_movies_2 <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
 #View(df_movies_2)
 
 names(df_restaurants)
