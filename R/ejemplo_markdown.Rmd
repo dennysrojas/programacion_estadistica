@@ -1,0 +1,103 @@
+---
+title: "Ejemplo Básico de R Markdown"
+author: "Dennys Rojas"
+date: "`r Sys.Date()`"
+output: html_document
+---
+<span style="color:red"># Introducción</span>
+ 
+<h2 style="color: red;">Título en rojo (nivel 2)</h2>
+ 
+<h3 style="color: blue; font-weight: bold;">Subtítulo azul en negrita (nivel 3)</h3>
+ 
+# Introducción
+ 
+Este documento es un ejemplo básico de cómo usar **R Markdown** para generar reportes en **HTML**.
+ 
+*R Markdown* permite combinar código R, texto, y resultados en un solo documento reproducible.
+ 
+## ¿Qué es R Markdown?
+ 
+R Markdown es una herramienta del ecosistema R que permite:
+ 
+- Combinar código y texto
+- Documentar análisis reproducibles
+- Exportar en múltiples formatos: HTML, PDF, Word, etc.
+ 
+A continuación veremos un ejemplo completo que incluye:
+ 
+1. Texto explicativo
+2. Código R
+3. Gráficos
+4. Análisis básico
+ 
+---
+ 
+## Encabezado de Nivel 2: Configuración Inicial
+ 
+```{r setup, include=FALSE}
+# Esta parte se ejecuta al principio pero no se muestra en el documento final (por include=FALSE)
+# Sirve para cargar paquetes y ajustar opciones generales
+ 
+# Cargar librerías necesarias
+library(tidyverse)
+ 
+# Ajustar opciones para que los gráficos tengan mejor presentación
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+ 
+##  Exploración del dataset mtcars
+El dataset mtcars viene por defecto en R y contiene datos de consumo de combustible y otras características de automóviles.
+ 
+###  Vista previa de los datos
+```{r bloque_1, echo=FALSE}
+# Mostrar las primeras 6 filas del dataset
+knitr::kable(head(mtcars), caption = "Primeras filas del dataset mtcars")
+#head(mtcars)
+```
+ 
+## Análisis estadístico básico
+Vamos a calcular estadísticas descriptivas básicas para algunas variables.
+```{r bloque_2, echo=FALSE}
+# Calcular media, mediana y desviación estándar para mpg, hp y wt
+knitr::kable(mtcars %>% 
+  summarise(
+    media_mpg = mean(mpg),
+    mediana_mpg = median(mpg),
+    sd_mpg = sd(mpg),
+    media_hp = mean(hp),
+    mediana_hp = median(hp),
+    sd_hp = sd(hp),
+    media_wt = mean(wt),
+    mediana_wt = median(wt),
+    sd_wt = sd(wt)
+  ), caption = "Primeras filas del dataset mtcars")
+ 
+```
+## Visualización de datos
+Vamos a realizar un gráfico de dispersión para observar la relación entre el peso del vehículo y el consumo de combustible.
+ 
+```{r bloque_3, echo=FALSE}
+# Gráfico de dispersión entre peso y millas por galón
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue", size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "Relación entre peso y consumo de combustible",
+       x = "Peso (1000 lbs)",
+       y = "Millas por galón (mpg)")
+ 
+```
+ 
+##  Análisis final
+Podemos observar que:
+ 
+- Existe una relación negativa entre el peso del vehículo y el consumo de combustible.
+- A mayor peso (wt), menor rendimiento (mpg).
+- Esta relación es evidente en la recta de regresión añadida al gráfico.
+ 
+Este tipo de análisis básico permite a los analistas comprender rápidamente patrones importantes en los datos.
+ 
+## Conclusiones
+- R Markdown es ideal para documentar análisis de forma clara y reproducible.
+- Permite combinar texto, código y resultados en un solo archivo.
+- Es muy útil en la elaboración de reportes profesionales y académicos.
