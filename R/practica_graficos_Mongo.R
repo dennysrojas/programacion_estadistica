@@ -20,12 +20,12 @@ library(plotly)       # Gráficos interactivos
 # 1. Conectar a la colección 'movies'
 conexion_movies <- mongo(collection = "movies",
                          db = "sample_mflix",
-                         url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+                         url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 # Conectar a la colección 'comments'
 conexion_comments <- mongo(collection = "comments",
                            db = "sample_mflix",
-                           url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+                           url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 # Obtener dataframes
 df_movies <- conexion_movies$find()
@@ -34,10 +34,10 @@ df_comments <- conexion_comments$find()
 View(df_movies)
 View(df_comments)
 
-#df_movies_pp <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
+#df_movies_pp <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
 #View(df_movies_pp)
 
-#df_movies_2 <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://dennysrojas:Dennys1101@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
+#df_movies_2 <- mongo(collection = "movies", db = "sample_mflix", url = url = "mongodb+srv://username:password@cluster0.cfxy7r9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")$find()
 #View(df_movies_2)
 
 names(df_movies)
