@@ -1,0 +1,183 @@
+---
+title: "Análisis Interactivo de Pingüinos"
+author: "Dennys Rojas"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly
+runtime: shiny
+
+---
+ 
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+library(shiny)
+
+library(palmerpenguins)
+
+library(ggplot2)
+
+library(dplyr)
+
+library(DT)
+
+library(plotly)
+ 
+```
+
+# Introducción
+ 
+<p style="text-align: justify;">En este documento interactivo exploramos el dataset penguins del paquete palmerpenguins. Este dataset contiene medidas físicas de tres especies de pingüinos (Adelie, Gentoo y Chinstrap) tomadas en tres islas de la Antártida.
+ 
+El objetivo es analizar visualmente la relación entre características morfológicas como la masa corporal, el largo del pico y el largo de la aleta, según la especie y ubicación.</p>
+ 
+# Vista previa del dataset
+
+```{r bloque_1, echo=FALSE}
+
+DT::datatable(head(na.omit(penguins)), options = list(pageLength = 5), caption = "Primeras filas del dataset")
+ 
+```
+
+# Filtro por especie
+ 
+```{r bloque_2, echo=FALSE}
+
+selectInput("especie_sel", "Selecciona especie:", 
+
+            choices = unique(na.omit(penguins)$species),
+
+            selected = "Adelie")
+
+renderPlot({
+
+  datos_filtrados <- na.omit(penguins) %>%
+
+    filter(species == input$especie_sel)
+
+  ggplot(datos_filtrados, aes(x = bill_length_mm, y = body_mass_g, color = island)) +
+
+    geom_point(size = 3, alpha = 0.7) +
+
+    labs(title = paste("Longitud del Pico vs Masa Corporal -", input$especie_sel),
+
+         x = "Longitud del Pico (mm)", y = "Masa Corporal (g)", color = "Isla") +
+
+    theme_minimal()
+
+})
+ 
+```
+
+# Gráfico 2D: Relación Pico vs Masa
+
+Este gráfico muestra la relación entre la longitud del pico (en mm) y la masa corporal (en gramos), filtrada por especie.
+ 
+```{r bloque_3, echo=FALSE}
+
+renderPlot({
+
+  datos_filtrados <- na.omit(penguins) %>%
+
+    filter(species == input$especie_sel)
+
+  ggplot(datos_filtrados, aes(x = bill_length_mm, y = body_mass_g, color = island)) +
+
+    geom_point(size = 3, alpha = 0.7) +
+
+    labs(title = paste("Longitud del Pico vs Masa Corporal -", input$especie_sel),
+
+         x = "Longitud del Pico (mm)", y = "Masa Corporal (g)", color = "Isla") +
+
+    theme_minimal()
+
+})
+ 
+```
+
+**Análisis:**
+
+Este gráfico permite observar cómo se distribuyen los individuos según su masa corporal y la longitud del pico. También se puede detectar si hay diferencias entre las islas.
+ 
+# Gráfico 3D: Pico, Aleta y Masa Corporal
+
+El siguiente gráfico muestra en 3D la relación entre tres variables: longitud del pico, longitud de la aleta y masa corporal. Esto nos permite visualizar agrupamientos o patrones entre individuos.
+ 
+```{r bloque_4, echo=FALSE}
+
+plotlyOutput("grafico3d")
+ 
+```
+
+```{r bloque_5, echo=FALSE}
+
+output$grafico3d <- renderPlotly({
+
+  datos_filtrados <- na.omit(penguins) %>%
+
+    filter(species == input$especie_sel)
+
+  plot_ly(data = datos_filtrados,
+
+          x = ~bill_length_mm,
+
+          y = ~flipper_length_mm,
+
+          z = ~body_mass_g,
+
+          type = 'scatter3d',
+
+          mode = 'markers',
+
+          color = ~island,
+
+          colors = "Set2",
+
+          marker = list(size = 4)) %>%
+
+    layout(title = paste("Distribución 3D -", input$especie_sel),
+
+           scene = list(
+
+             xaxis = list(title = "Longitud Pico (mm)"),
+
+             yaxis = list(title = "Longitud Aleta (mm)"),
+
+             zaxis = list(title = "Masa Corporal (g)")
+
+           ))
+
+})
+ 
+```
+
+**Análisis del gráfico 3D:**
+
+Podemos detectar si hay clusters o agrupaciones entre pingüinos según sus características físicas. Además, el color por isla permite estudiar si el entorno geográfico tiene relación con estas medidas.
+ 
+# Conclusiones
+
+- Las especies de pingüinos muestran diferencias claras en sus medidas corporales.
+ 
+- Las islas también parecen influir en las características físicas.
+ 
+- Los gráficos 3D permiten detectar grupos y relaciones difíciles de observar en 2D.
+ 
+Este informe combina texto, interactividad y visualización avanzada para facilitar el análisis exploratorio de datos de manera didáctica y atractiva.
+ 
+<!-- Esta línea es para agregar una imagen -->
+
+![Pingüino Adelie](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/man/figures/lter_penguins.png)
+ 
+<!-- Esta línea es para agregar un video -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_TnYxCYxyBQ" 
+
+frameborder="0" allowfullscreen></iframe>
+ 
+ 
+ 

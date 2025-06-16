@@ -1,0 +1,12 @@
+name: practica2
+title: practica2
+username: dennysrojas
+account: dennysrojas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14929361
+bundleId: 10448708
+url: https://dennysrojas.shinyapps.io/practica2/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

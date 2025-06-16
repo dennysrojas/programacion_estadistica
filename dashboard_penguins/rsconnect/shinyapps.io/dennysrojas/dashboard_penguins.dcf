@@ -1,0 +1,12 @@
+name: dashboard_penguins
+title: dashboard_penguins
+username: dennysrojas
+account: dennysrojas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14936423
+bundleId: 10457415
+url: https://dennysrojas.shinyapps.io/dashboard_penguins/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,131 @@
+---
+title: "Análisis Exploratorio del Dataset de Pingüinos" # Título del documento que aparecerá en la parte superior del HTML
+author: "Dennys Rojas"    # Autor del documento
+date: "`r Sys.Date()`"# Fecha dinámica que se actualiza automáticamente con la fecha actual del sistema
+output: # Sección que define el formato de salida del documento
+  html_document: # Indica que el documento de salida será en formato HTML
+    toc: true    # Muestra una tabla de contenido en el documento
+    toc_float: true  # Hace que la tabla de contenido flote y se mantenga visible al desplazarse
+    number_sections: true # Numera automáticamente las secciones y subsecciones del documento
+    theme: flatly  # Aplica el tema visual 'cerulean' al HTML (colores, fuentes, etc., otros pueden ser journal,flatly, etc. )
+---
+
+```{r setup, include=FALSE}
+# Bloque de código R llamado 'setup'; no se muestra en el documento final (include=FALSE)
+ 
+# Configura opciones globales para todos los bloques de código R en el documento
+knitr::opts_chunk$set(echo = TRUE,  # Muestra el código R en el documento final
+                      message = FALSE,  # Oculta los mensajes generados por el código (como mensajes informativos)
+                      warning = FALSE)  # Oculta las advertencias (warnings) que el código pueda generar
+ 
+ 
+# Cargar librerías
+library(palmerpenguins)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(plotly)
+ 
+```
+
+# Introducción
+
+<p style="text-align: justify;">
+
+Este informe explora el dataset penguins, el cual contiene información morfológica de pingüinos de tres especies que habitan distintas islas en la región Antártica. A partir de una limpieza y transformación inicial, se realizará un análisis gráfico y exploratorio, incluyendo visualizaciones en 3D para facilitar la identificación de patrones multivariados.
+
+</p>
+
+# Preparación de los datos
+
+```{r bloque_1, echo=FALSE}
+ 
+# Para evitar que salga el doble símbolo de numeral al principio de cada fila
+# Cargar y limpiar el dataset
+df_pinguinos <- na.omit(penguins)
+ 
+# Renombrar columnas al espaniol
+colnames(df_pinguinos) <- c("especie", "isla", "longitud_pico_mm", "profundidad_pico_mm",
+                            "longitud_aleta_mm", "masa_corporal_g", "sexo", "anio")
+ 
+# Vista previa
+knitr::kable(head(df_pinguinos), caption = "Primeras filas del dataset Pinguinos")
+ 
+```
+
+# Distribuciones por especie
+
+## Masa corporal
+
+```{r bloque_2, echo=FALSE}
+ggplot(df_pinguinos, aes(x = masa_corporal_g, fill = especie)) +
+  geom_histogram(position = "identity", alpha = 0.6, bins = 30) +
+  labs(title = "Distribución de la masa corporal por especie",
+       x = "Masa corporal (g)", y = "Frecuencia") +
+  theme_minimal()
+```
+
+**Análisis:** Se observa que la especie Gentoo presenta masas corporales más elevadas, mientras que Adelie tiende a ser más ligera.
+
+## Relación entre longitud de pico y aleta
+
+```{r bloque_3, echo=FALSE}
+ggplot(df_pinguinos, aes(x = longitud_pico_mm, y = longitud_aleta_mm, color = especie)) +
+  geom_point(size = 2, alpha = 0.8) +
+  labs(title = "Relación entre longitud del pico y longitud de la aleta",
+       x = "Longitud del pico (mm)", y = "Longitud de la aleta (mm)") +
+  theme_light()
+ 
+```
+
+**Análisis:** Existe una correlación moderada entre ambas variables. Gentoo se distingue claramente por mayor tamaño corporal general.
+
+# Visualización 3D
+
+Para observar mejor la distribución multivariada, se construye un gráfico 3D interactivo utilizando el paquete **plotly**
+
+```{r bloque_4, echo=FALSE}
+plot_ly(df_pinguinos,
+        x = ~longitud_pico_mm,
+        y = ~longitud_aleta_mm,
+        z = ~masa_corporal_g,
+        color = ~especie,
+        colors = c("darkorange", "steelblue", "darkgreen"),
+        type = "scatter3d",
+        mode = "markers") %>%
+  layout(title = "Gráfico 3D: Pico vs Aleta vs Masa Corporal",
+         scene = list(
+           xaxis = list(title = "Longitud Pico (mm)"),
+           yaxis = list(title = "Longitud Aleta (mm)"),
+           zaxis = list(title = "Masa Corporal (g)")
+         ))
+ 
+```
+
+**Análisis:** Esta visualización 3D permite distinguir claramente conglomerados por especie. Gentoo se agrupa en valores altos de las tres variables.
+
+# Comparación por sexo
+
+```{r bloque_5, echo=FALSE}
+ggplot(df_pinguinos, aes(x = sexo, y = masa_corporal_g, fill = sexo)) +
+  geom_boxplot() +
+  facet_wrap(~ especie) +
+  labs(title = "Comparación de masa corporal por sexo y especie",
+       x = "Sexo", y = "Masa Corporal (g)") +
+  theme_minimal()
+ 
+```
+
+**Análisis:** En todas las especies, los machos tienden a tener una mayor masa corporal que las hembras, lo que sugiere un dimorfismo sexual morfológico.
+
+# Conclusiones
+
+-   Se evidencian diferencias marcadas entre especies en variables clave como - masa corporal y longitud de aleta.
+
+-   Gentoo presenta dimensiones corporales consistentemente más altas.
+
+-   El gráfico 3D permitió visualizar la estructura multivariada de forma clara.
+
+-   El dimorfismo sexual es evidente en todas las especies.
+
+-   Este análisis básico puede extenderse a modelos predictivos o dashboards interactivos.
