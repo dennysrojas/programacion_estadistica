@@ -83,7 +83,7 @@ ui <- dashboardPage(
       # --- Pestaña 2: Análisis Gráfico ---
       tabItem(tabName = "visualizacion",
               fluidRow(
-                box(title = "Gráfico Estático: Calidad del Corte", status = "info", solidHeader = TRUE,
+                box(title = "Gráfico Estático: Calidad del Corte", status = "primary", solidHeader = TRUE,
                     width = 12, plotOutput("staticCutPlot"))
               ),
               fluidRow(
@@ -108,7 +108,7 @@ ui <- dashboardPage(
       tabItem(tabName = "analisis",
               fluidRow(
                 column(width = 6,
-                       box(title = "Gráfico Personalizado 1", status = "success", solidHeader = TRUE, width = NULL,
+                       box(title = "Gráfico Personalizado 1", status = "primary", solidHeader = TRUE, width = NULL,
                            
                            selectInput("plot_type_A", "Paso 1: Seleccione el tipo de gráfico",
                                        choices = c("Histograma", "Gráfico de Dispersión", "Gráfico de Cajas (Boxplot)")),
@@ -119,7 +119,7 @@ ui <- dashboardPage(
                        )
                 ),
                 column(width = 6,
-                       box(title = "Gráfico Personalizado 2", status = "success", solidHeader = TRUE, width = NULL,
+                       box(title = "Gráfico Personalizado 2", status = "primary", solidHeader = TRUE, width = NULL,
                            selectInput("plot_type_B", "Paso 1: Seleccione el tipo de gráfico",
                                        choices = c("Gráfico de Dispersión", "Histograma", "Gráfico de Cajas (Boxplot)"), selected = "Gráfico de Dispersión"),
                            uiOutput("plot_controls_B"),
