@@ -23,6 +23,5 @@ Contiene análisis estadísticos y reportes generados con R y R Markdown.
 
 ### Estructura del Repositorio
 
-- **/data/**: Contiene los datasets crudos y procesados que se usan en ambos entornos.
 - **/python/**: Contiene todos los notebooks y scripts de Python.
 - **/R/**: Contiene todos los scripts y reportes de R.
