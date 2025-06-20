@@ -1,4 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+/venv/
+/env/
+/.venv/
+/.env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb.bak
+
+# R
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.Renviron
+*renv/
+
+# Archivos de Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Datos (Descomentar si no quieres subir datos al repositorio)
+# data/
+
+# Archivos de output
+/python/output/
+/R/output/
