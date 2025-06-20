@@ -1,0 +1,12 @@
+name: examen_final
+title: examen_final
+username: dennysrojas
+account: dennysrojas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14953890
+bundleId: 10475694
+url: https://dennysrojas.shinyapps.io/examen_final/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

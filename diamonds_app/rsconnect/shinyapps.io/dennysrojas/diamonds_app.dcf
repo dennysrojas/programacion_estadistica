@@ -1,0 +1,12 @@
+name: diamonds_app
+title: diamonds_app
+username: dennysrojas
+account: dennysrojas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14953536
+bundleId: 10475397
+url: https://dennysrojas.shinyapps.io/diamonds_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,78 @@
+---
+title: "Análisis de Gráficos"
+author: "Dennys Rojas Llangarí"
+date: "17 de junio de 2025"
+output: 
+  html_document:
+    theme: cerulean
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+### **Introducción**
+
+Este documento presenta un análisis descriptivo de tres visualizaciones interactivas generadas a partir del dataset "Boston". Ha sido realizado por Dennys Rojas Llangarí en el contexto del Examen Final de la Materia de Programación Estadística, Ciencia de Datos e Introducción a la Visualización Interactiva de la Maestría en Estadística con Mención en Ciencia de Datos e Inteligencia Artificial de la Escuela Superior Politécnica de Chimborazo. Cada sección a continuación corresponde a uno de los gráficos presentados en el dashboard principal.
+
+---
+
+### **Gráfico 1: Dispersión 3D - Relación entre LSTAT, RM y MEDV**
+
+#### **Descripción del Gráfico**
+
+Esta visualización es un diagrama de dispersión en tres dimensiones que mapea las siguientes variables:
+
+* **Eje X (`lstat`):** Porcentaje de la población considerada de estatus socioeconómico bajo.
+* **Eje Y (`rm`):** Número promedio de habitaciones por vivienda.
+* **Eje Z (`medv`):** Valor medio de las viviendas ocupadas por sus propietarios (en miles de dólares).
+
+Cada punto en el espacio representa un suburbio de Boston. Adicionalmente, los puntos están coloreados según su valor en el eje Z (`medv`), utilizando una escala de color que va de tonos violetas oscuros (valores bajos) a tonos amarillos claros y brillantes (valores altos), lo que facilita la identificación visual de los precios de vivienda.
+
+#### **Análisis e Interpretación**
+
+Se puede observar la interacción de dos variables predictoras sobre el valor de la vivienda. Se pueden extraer las siguientes conclusiones clave:
+
+1.  **Correlación Negativa entre `lstat` y `medv`:** A medida que el porcentaje de población de bajo estatus (`lstat`) aumenta, el valor mediano de la vivienda (`medv`) tiende a disminuir significativamente. Esto sugiere que el factor socioeconómico del vecindario es un predictor muy potente del precio de la vivienda.
+
+2.  **Correlación Positiva entre `rm` y `medv`:** Los suburbios con un mayor número promedio de habitaciones (`rm`) tienden a tener un valor mediano de vivienda más alto. Esto es un reflejo de la realidad pues casas con más habitaciones por lo general suelen ser más costosas.
+
+---
+
+### **Gráfico 2: Histograma y Densidad de la Variable LSTAT**
+
+#### **Descripción del Gráfico**
+
+Este gráfico presenta la distribución de frecuencias de la variable `lstat`. Se compone de dos elementos superpuestos:
+
+* **Histograma (barras azules):** Muestra la cantidad de suburbios que caen dentro de rangos específicos del porcentaje de población de bajo estatus.
+* **Curva de Densidad (línea roja):** Proporciona una estimación suavizada y continua de la distribución de la variable.
+
+#### **Análisis e Interpretación**
+
+El análisis de la distribución de `lstat` revela indica que: 
+
+1.  **Distribución Asimétrica a la Derecha (Sesgo Positivo):** La distribución no es normal o simétrica. Esto significa que, aunque la mayoría de los suburbios tienen un porcentaje relativamente bajo de población de bajo estatus, existe un número no despreciable de suburbios con porcentajes mucho más altos.
+
+2.  **Concentración en Valores Bajos:** Esto indica que lo más común es un suburbio con un porcentaje bajo de población de estatus socioeconómico inferior.
+
+---
+
+### **Gráfico 3: Dispersión 2D - LSTAT vs. MEDV (Influencia del Río Charles)**
+
+#### **Descripción del Gráfico**
+
+Este diagrama de dispersión 2D profundiza en la relación entre `lstat` (eje X) y `medv` (eje Y). 
+
+* **Puntos:** Cada punto se pinta según la variable `chas`, que es un indicador binario (0 o 1). Los puntos naranjas representan suburbios que **no** colindan con el río Charles, mientras que los puntos celestes representan aquellos que **sí** lo hacen (`chas = 1`).
+* **Línea de Suavizado:** Se ha añadido una línea de regresión local (LOESS) que modela la relación entre `lstat` y `medv` de forma no lineal.
+
+#### **Análisis e Interpretación**
+
+1.  **Relación Inversa y No Lineal:** La curva de suavizado azul confirma la fuerte relación inversa entre `lstat` y `medv`. Es importante notar que la relación no es lineal; pues la pendiente y se vuelve menos pronunciada para valores muy altos de `lstat`.
+
+2.  **El Río Charles:** El análisis más interesante proviene de haber pintado los puntos. Para casi cualquier nivel de `lstat` en el eje X, los puntos celestes (`chas = 1`) tienden a situarse por encima de los puntos naranjas (`chas = 0`). Esto significa que, las viviendas en suburbios que colindan con el río Charles tienen, un valor más alto. 
+
+3.  **Identificación de Outliers:** El gráfico también permite identificar valores atípicos, como algunos suburbios con un `lstat` bajo pero que, a pesar de ello y de colindar con el río, tienen un `medv` bastante alto.
